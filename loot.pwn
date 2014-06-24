@@ -1,7 +1,6 @@
 #include <a_samp>
 #include <a_mysql>
 #include <streamer>
-#include <zcmd>
 #include <YSI\y_iterate>
 
 // =============== Definitions =============== //
@@ -122,6 +121,35 @@ AddDynamicLoot(objectid, label[MAX_LOOT_DESCRIPTION], Float:X, Float:Y, Float:Z,
 	mysql_tquery(SQLHandle, string, "", "");
 
 	CreateDynamicLoot(id, objectid, label, X, Y, Z, InteriorID, WorldID);
+}
+
+DeleteDynamicLoot(LootID, deleterid = INVALID_PLAYER_ID)
+{
+	new
+		string[128];
+
+	mysql_format(SQLHandle, string, sizeof(string), "SELECT * FROM "LOOTS_TABLE" WHERE "LOOT_INDEX_ID" = %i", LootID);
+	mysql_tquery(SQLHandle, string, string, "OnDeleteLoot", LootID, deleterid);
+}
+
+Callback:OnDeleteLoot(LootID, deleterid)
+{
+	new 
+		rows = cache_num_rows(),
+		string[128];
+
+	if(rows)
+	{
+		mysql_format(SQLHandle, string, sizeof(string), "DELETE * FROM "LOOTS_TABLE" WHERE "LOOT_INDEX_ID" = %i", lootID);
+		mysql_tquery(SQLHandle, string, "", "");
+		Iter_Remove(lootIndex, lootID);
+		printf("PlayerID: %i successfully deleted LootID: %i", deleterid, lootID);
+	}
+	else
+	{
+		printf("PlayerID: %i tried to delete invalid LootID: %i", deleterid, lootID);
+	}
+	return true;
 }
 
 CreateDynamicLoot(id, objectid, label[MAX_LOOT_DESCRIPTION], Float:X, Float:Y, Float:Z, InteriorID = -1, WorldID = -1)

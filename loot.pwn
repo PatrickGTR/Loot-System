@@ -142,6 +142,10 @@ Callback:OnDeleteLoot(LootID, deleterid)
 	{
 		mysql_format(SQLHandle, string, sizeof(string), "DELETE * FROM "LOOTS_TABLE" WHERE "LOOT_INDEX_ID" = %i", lootID);
 		mysql_tquery(SQLHandle, string, "", "");
+
+		DestroyDynamicObject(lootInfo[lootID][lootObjectID]);
+		DestroyDynamic3DTextLabel(lootInfo[lootID][ObjectLabel]);
+		
 		Iter_Remove(lootIndex, lootID);
 		printf("PlayerID: %i successfully deleted LootID: %i", deleterid, lootID);
 	}

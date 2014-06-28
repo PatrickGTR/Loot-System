@@ -13,10 +13,10 @@
 #define MAX_LOOT_DESCRIPTION (32)
 
 // =============== MySQL =============== //
-#define SQL_HOST 	"de.linuxthefish.net"
-#define SQL_DB		"pds2"
-#define SQL_USER	"pds2"
-#define SQL_PASS	"faW6LbgriZhmXOtXf4"
+#define SQL_HOST 	""
+#define SQL_DB		""
+#define SQL_USER	""
+#define SQL_PASS	""
 
 // =============== Tables =============== //
 #define LOOTS_TABLE "Loots"

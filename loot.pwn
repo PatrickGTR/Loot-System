@@ -13,10 +13,10 @@
 #define MAX_LOOT_DESCRIPTION (32)
 
 // =============== MySQL =============== //
-#define SQL_HOST 	""
-#define SQL_DB		""
-#define SQL_USER	""
-#define SQL_PASS	""
+#define SQL_HOST 	"de.linuxthefish.net"
+#define SQL_DB		"pds2"
+#define SQL_USER	"pds2"
+#define SQL_PASS	"faW6LbgriZhmXOtXf4"
 
 // =============== Tables =============== //
 #define LOOTS_TABLE "Loots"
@@ -37,7 +37,7 @@ enum e_lootInfo
 {
 	lootID,
 	lootModelID,
-	lootDesc,
+	lootDesc[MAX_LOOT_DESCRIPTION],
 	Float:lootPos[3],
 	lootIntID,
 	lootVWID,
@@ -162,6 +162,10 @@ CreateDynamicLoot(id, objectid, label[MAX_LOOT_DESCRIPTION], Float:X, Float:Y, F
 	if(Iter_Count(lootIndex) == -1)
 		return print("ERROR: MAX_LOOTS reached, increase the limit size.");
 
+	if(lootInfo[id][lootDesc][0] != EOS)
+	{
+		lootInfo[id][lootDesc][0] = EOS;
+	}
 
 	strcat(lootInfo[id][lootDesc], label, MAX_LOOT_DESCRIPTION);
 	lootInfo[id][lootModelID] = objectid;	

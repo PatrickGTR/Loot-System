@@ -13,10 +13,10 @@
 #define MAX_LOOT_DESCRIPTION (32)
 
 // =============== MySQL =============== //
-#define SQL_HOST 	""
-#define SQL_DB		""
-#define SQL_USER	""
-#define SQL_PASS	""
+#define SQL_HOST 	"SQL_HOST"
+#define SQL_DB		"SQL_DB"
+#define SQL_USER	"SQL_USER"
+#define SQL_PASS	"SQL_PASS"
 
 // =============== Tables =============== //
 #define LOOTS_TABLE "Loots"
